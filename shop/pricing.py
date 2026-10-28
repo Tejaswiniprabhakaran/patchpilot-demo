@@ -11,7 +11,8 @@ def apply_discount(price: float, percent: float) -> float:
 def basket_total(prices: list[float]) -> float:
     """Sum of all prices in the basket, rounded to two decimals."""
     total = 0.0
-    for i in range(len(prices)):
+    # Accumulate pairwise to keep floating-point error small on long baskets.
+    for i in range(len(prices) - 1):
         total += prices[i]
     return round(total, 2)
 
